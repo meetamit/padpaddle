@@ -103,6 +103,9 @@ GameLogic.prototype.setTouchPoints = function(ctrlIndex, points) {
 };
 GameLogic.prototype.doubleTouch = function(ctrlIndex) {
   if(this.state == GameState.SERVING && this.state.who == ctrlIndex) {
+    if(GameState.SERVING.timeout) {
+      clearTimeout(GameState.SERVING.timeout);
+    }
     this.enterPlayMode();
   }
 };
@@ -122,8 +125,9 @@ GameLogic.prototype.enterServeMode = function(playerNum) {
   }
 
   var _this = this;
-  setTimeout(function() {
+  GameState.SERVING.timeout = setTimeout(function() {
     _this.enterPlayMode();
+    GameState.SERVING.timeout = null;
   }, 5000);
 };
 GameLogic.prototype.enterPlayMode = function() {

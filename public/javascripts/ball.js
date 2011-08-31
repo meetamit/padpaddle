@@ -17,7 +17,7 @@ function Ball(world, gameDef) {
   this.body.CreateFixture(fixtureDef);
 }
 
-Ball.vMax = 20;
+Ball.vMax = 24;
 
 Ball.prototype.getState = function() {
   var position = this.body.GetPosition();
